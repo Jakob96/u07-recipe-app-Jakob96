@@ -27,4 +27,10 @@ export class RecipeService {
       map(res => res.hits.map(res => res.recipe))
     );
   }
+
+  getRecipe(id:string): Observable<Recipe> {
+    return this.http.get<any>(this.api_url + id + this.api_auth).pipe(
+      map(res => res.hits.map(res => res.recipe))
+    );
+  }
 }
