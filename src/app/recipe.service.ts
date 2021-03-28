@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Recipies } from './recipes';
+import { map, filter, scan } from 'rxjs/operators';
+import { Recipe } from './recipe';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -21,7 +22,9 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipies(query, max = 100): Observable<Recipies> {
-    return this.http.get<Recipies>(this.api_url + query + this.api_auth + "&to=" + max);
+  getRecipes(query:string, max:number = 100): Observable<Recipe[]> {
+    return this.http.get<any>(this.api_url + query + this.api_auth + "&to=" + max).pipe(
+      map(res => res.hits.map(res => res.recipe))
+    );
   }
 }
