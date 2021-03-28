@@ -1,21 +1,6 @@
 //Interface generated with http://json2ts.com
 
-export interface Recipies {
-    q:     string;
-    from:  number;
-    to:    number;
-    more:  boolean;
-    count: number;
-    hits:  Hit[];
-}
-
-interface Hit {
-    recipe:     Recipe;
-    bookmarked: boolean;
-    bought:     boolean;
-}
-
-interface Recipe {
+export interface Recipe {
     uri:             string;
     label:           string;
     image:           string;
