@@ -18,6 +18,10 @@ export class RecipeListComponent implements OnInit {
     this.getRecipes(this.filter, 50);
   }
 
+  ngOnChanges(changes: SimpleChanges){
+    this.getRecipes(this.filter, 50)
+  }
+
   getRecipes(query, max) {
     this.recipeService.getRecipes(query, max)
       .subscribe(data => {

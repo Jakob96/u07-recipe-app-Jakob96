@@ -1,1 +1,9 @@
+<mat-form-field>
+    <mat-label>Search for recipes</mat-label>
+    <input matInput type="text" [(ngModel)]="filter">
+    <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
 <app-recipe-list [filter]="filter"></app-recipe-list>
