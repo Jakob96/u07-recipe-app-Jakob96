@@ -9,23 +9,30 @@ import { Recipe } from '../recipe';
 })
 
 export class RecipeListComponent implements OnInit {
-  @Input() filter: string;
+  @Input() search: string;
+  @Input() dishType: Array<string>;
+  @Input() health: Array<string>;
   recipes: Recipe[] = [];
 
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit() {
-    this.getRecipes(this.filter, 50);
+    this.getRecipes(this.search, 50);
   }
 
   ngOnChanges(changes: SimpleChanges){
-    this.getRecipes(this.filter, 50)
+    if (this.search) {
+      this.getRecipes(this.search, 50)
+    }
+    else {
+      this.getRecipes("", 50)
+    }
   }
 
   getRecipes(query, max) {
-    this.recipeService.getRecipes(query, max)
-      .subscribe(data => {
-        this.recipes = data;
+    this.recipeService.getRecipes(query, this.dishType, this.health, max)
+      .subscribe(res => {
+        this.recipes = res;
       })
   }
 }

@@ -1,9 +1,33 @@
 <mat-form-field>
     <mat-label>Search for recipes</mat-label>
-    <input matInput type="text" [(ngModel)]="filter">
-    <button mat-button *ngIf="filter" matSuffix mat-icon-button aria-label="Clear" (click)="filter=''">
+    <input matInput type="text" [(ngModel)]="search">
+    <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
         <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
 
-<app-recipe-list [filter]="filter"></app-recipe-list>
+<mat-form-field appearance="fill">
+    <mat-label>Dish type</mat-label>
+    <mat-select [(ngModel)]="selectedDish" (ngModelChange)="filterDish($event)">
+        <mat-option value="Main course">
+            Main course
+        </mat-option>
+        <mat-option value="Drinks">
+            Drinks
+        </mat-option>
+        <mat-option value="Starter">
+            Starter
+        </mat-option>
+        <mat-option value="Desserts">
+            Dessert
+        </mat-option>
+        <mat-option value="Soup">
+            Soup
+        </mat-option>
+        <mat-option value="Sandwiches">
+            Sandwiches
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<app-recipe-list [search]="search" [dishType]="dishType" [health]="health"></app-recipe-list>
