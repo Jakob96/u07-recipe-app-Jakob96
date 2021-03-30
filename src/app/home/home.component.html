@@ -8,8 +8,8 @@
 
 <mat-form-field appearance="fill">
     <mat-label>Dish type</mat-label>
-    <mat-select [(ngModel)]="selectedDish" (ngModelChange)="filterDish($event)">
-        <mat-option value="Main course">
+    <mat-select [(ngModel)]="dishType" multiple>
+        <mat-option value="Main%20Course">
             Main course
         </mat-option>
         <mat-option value="Drinks">
@@ -26,6 +26,21 @@
         </mat-option>
         <mat-option value="Sandwiches">
             Sandwiches
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Diet</mat-label>
+    <mat-select [(ngModel)]="health" multiple>
+        <mat-option value="vegan">
+            Vegan
+        </mat-option>
+        <mat-option value="vegetarian">
+            Vegetarian
+        </mat-option>
+        <mat-option value="gluten-free">
+            Gluten free
         </mat-option>
     </mat-select>
 </mat-form-field>
