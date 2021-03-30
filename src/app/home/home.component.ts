@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  search: string;
+  search: string = '';
   dishType: Array<string>;
   health: Array<string>;
   selectedDish: string;
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-      
+
   }
 
   filterDish($event) {
