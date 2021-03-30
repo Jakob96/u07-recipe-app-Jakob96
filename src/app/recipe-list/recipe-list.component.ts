@@ -13,7 +13,6 @@ export class RecipeListComponent implements OnInit {
   @Input() dishType: Array<string>;
   @Input() health: Array<string>;
   recipes: Recipe[] = [];
-  mealType: Array<string>;
 
   constructor(private recipeService: RecipeService) { }
 
@@ -22,16 +21,16 @@ export class RecipeListComponent implements OnInit {
       this.getRecipes(this.search, 50);
     }
     else {
-      this.getMealRecommendation();
+      this.getMealRecommendations();
     }
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if (this.search) {
+  ngOnChanges(changes: SimpleChanges) {    
+    if (this.search || this.dishType && this.dishType.length || this.health && this.health.length) {  
       this.getRecipes(this.search, 50)
     }
     else {
-      this.getMealRecommendation();
+      this.getMealRecommendations();
     }
   }
 
@@ -42,24 +41,25 @@ export class RecipeListComponent implements OnInit {
       })
   }
 
-  getMealRecommendation() {
+  getMealRecommendations() {
   const currentHour = parseInt(new Date().toLocaleTimeString('sv-se').substr(0, 2));
+  let mealType: Array<string>;
 
     switch(true) {
       case (currentHour <= 10 && currentHour > 6):
-        this.mealType = ['breakfast'];
+        mealType = ['breakfast'];
         break;
       case (currentHour <= 13):
-        this.mealType = ['lunch'];
+        mealType = ['lunch'];
         break;
       case (currentHour <= 21):
-        this.mealType = ['dinner'];
+        mealType = ['dinner'];
         break;
       default:
-        this.mealType = ['snack'];
+        mealType = ['snack'];
         break;
     }
 
-    this.getRecipes(this.mealType[0], 50, this.mealType);
+    this.getRecipes(mealType[0], 50, mealType);
   }
 }
