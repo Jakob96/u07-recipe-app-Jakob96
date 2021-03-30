@@ -22,8 +22,8 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getRecipes(query:string, dishType:Array<string> = null, health:Array<string> = null, max:number = 100): Observable<Recipe[]> {
-    return this.http.get<any>(this.api_url + query + this.api_auth + "&to=" + max + (dishType ? "&dishType=" + dishType.join("&dishType=") : "") + (health ? "&health=" + health.join("&health=") : "")).pipe(
+  getRecipes(query:string, dishType:Array<string> = null, health:Array<string> = null, mealType:Array<string> = null, max:number = 100): Observable<Recipe[]> {
+    return this.http.get<any>(this.api_url + query + this.api_auth + "&to=" + max + (dishType ? "&dishType=" + dishType.join("&dishType=") : "") + (health ? "&health=" + health.join("&health=") : "") + (mealType ? "&mealType=" + mealType.join("&mealType=") : "")).pipe(
       map(res => res.hits.map(res => res.recipe))
     );
   }
