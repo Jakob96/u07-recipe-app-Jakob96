@@ -1,7 +1,8 @@
 <mat-toolbar color="primary">
     <span>{{ headerTitle }}</span>
     <span class="spacer"></span>
-    <button mat-icon-button aria-label="Main menu">
-        <mat-icon>menu</mat-icon>
-    </button>
+    <mat-nav-list class="list-horizontal">
+        <a mat-list-item>My recipes</a>
+        <a mat-list-item>Saved recipes</a>
+    </mat-nav-list>
 </mat-toolbar>

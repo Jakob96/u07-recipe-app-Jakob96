@@ -1,3 +1,13 @@
 .spacer {
     flex: 1 1 auto;
 }
+
+.list-horizontal {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 6px;
+
+    .mat-list-item {
+        color: #fff;
+    }
+}
