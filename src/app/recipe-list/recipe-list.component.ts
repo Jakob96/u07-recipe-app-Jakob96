@@ -46,13 +46,13 @@ export class RecipeListComponent implements OnInit {
   let mealType: Array<string>;
 
     switch(true) {
-      case (currentHour <= 10 && currentHour > 6):
+      case (currentHour <= 10 && currentHour >= 6):
         mealType = ['breakfast'];
         break;
-      case (currentHour <= 13):
+      case (currentHour <= 13 && currentHour >= 11):
         mealType = ['lunch'];
         break;
-      case (currentHour <= 21):
+      case (currentHour <= 21 && currentHour >= 17):
         mealType = ['dinner'];
         break;
       default:
