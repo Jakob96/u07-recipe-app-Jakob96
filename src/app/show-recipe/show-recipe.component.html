@@ -1,0 +1,20 @@
+<h1>{{ recipe?.label }}</h1>
+
+<img src="{{ recipe?.image }}" class="round" alt="{{ recipe?.label }}" />
+
+<mat-list role="list">
+    <mat-list-item role="listitem"></mat-list-item>
+</mat-list>
+
+<h3>Ingredients</h3>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let ingredient of recipe?.ingredients">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ ingredient.text }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        {{ ingredient.foodCategory | titlecase }}
+        <img src="{{ ingredient.image }}" class="round" alt="{{ ingredient.text }}" />
+    </mat-expansion-panel>
+</mat-accordion>

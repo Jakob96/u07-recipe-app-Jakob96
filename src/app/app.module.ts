@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
+import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { MatListModule } from '@angular/material/list';
     HeaderComponent,
     HomeComponent,
     RecipeListComponent,
+    ShowRecipeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { MatListModule } from '@angular/material/list';
     MatInputModule,
     MatSelectModule,
     MatListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
