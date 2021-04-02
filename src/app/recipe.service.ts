@@ -36,7 +36,6 @@ export class RecipeService {
 
   saveRecipe(recipe:Recipe): void {
     localStorage.setItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length), JSON.stringify(recipe));
-    console.log(localStorage.getItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)))
   }
 
   removeRecipe(recipe:Recipe): void {

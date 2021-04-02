@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     HomeComponent,
     RecipeListComponent,
     ShowRecipeComponent,
+    SavedRecipesListComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatSelectModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
