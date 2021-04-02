@@ -62,4 +62,16 @@ export class RecipeListComponent implements OnInit {
 
     this.getRecipes(mealType[0], 50, mealType);
   }
+
+  saveRecipe(recipe) {
+    this.recipeService.saveRecipe(recipe);
+  }
+
+  removeRecipe(recipe) {
+    this.recipeService.removeRecipe(recipe);
+  }
+
+  recipeSaved(recipe) {
+    return this.recipeService.recipeSaved(recipe);
+  }
 }

@@ -13,7 +13,8 @@
             <button mat-button
                 [routerLink]="'/recipe/' + recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)">Show
                 recipe</button>
-            <button mat-button>Save</button>
+            <button mat-button (click)="saveRecipe(recipe)" *ngIf="!recipeSaved(recipe)">Save</button>
+            <button mat-button (click)="removeRecipe(recipe)" *ngIf="recipeSaved(recipe)">Remove</button>
         </mat-card-actions>
     </mat-card>
 </section>

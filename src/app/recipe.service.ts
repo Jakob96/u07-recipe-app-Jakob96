@@ -33,4 +33,17 @@ export class RecipeService {
       map(res => res.hits.map(res => res.recipe))
     );
   }
+
+  saveRecipe(recipe:Recipe): void {
+    localStorage.setItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length), JSON.stringify(recipe));
+    console.log(localStorage.getItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)))
+  }
+
+  removeRecipe(recipe:Recipe): void {
+    localStorage.removeItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length));
+  }
+
+  recipeSaved(recipe:Recipe): boolean {
+    return (localStorage.getItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)) ? true : false);
+  }
 }
