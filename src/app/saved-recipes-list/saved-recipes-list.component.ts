@@ -26,4 +26,8 @@ recipes: Recipe[] = [];
     this.recipes = this.recipes.filter((element) => element.uri != recipe.uri);
     this.recipeService.removeRecipe(recipe);
   }
+
+  getRecipeId(recipe) {
+    return this.recipeService.getRecipeId(recipe);
+  }
 }

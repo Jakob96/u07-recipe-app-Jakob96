@@ -74,4 +74,8 @@ export class RecipeListComponent implements OnInit {
   recipeSaved(recipe) {
     return this.recipeService.recipeSaved(recipe);
   }
+
+  getRecipeId(recipe) {
+    return this.recipeService.getRecipeId(recipe);
+  }
 }

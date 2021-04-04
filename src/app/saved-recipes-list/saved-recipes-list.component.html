@@ -10,8 +10,7 @@
             <img mat-card-image src="{{ recipe.image }}" alt="{{ recipe.label }}" height="250px" />
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button
-                [routerLink]="'/recipe/' + recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)">Show
+            <button mat-button [routerLink]="'/recipe/' + getRecipeId(recipe)">Show
                 recipe</button>
             <button mat-button (click)="removeRecipe(recipe)">Remove from saved</button>
         </mat-card-actions>

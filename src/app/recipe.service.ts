@@ -35,14 +35,18 @@ export class RecipeService {
   }
 
   saveRecipe(recipe:Recipe): void {
-    localStorage.setItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length), JSON.stringify(recipe));
+    localStorage.setItem(this.getRecipeId(recipe), JSON.stringify(recipe));
   }
 
   removeRecipe(recipe:Recipe): void {
-    localStorage.removeItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length));
+    localStorage.removeItem(this.getRecipeId(recipe));
   }
 
   recipeSaved(recipe:Recipe): boolean {
-    return (localStorage.getItem(recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length)) ? true : false);
+    return (localStorage.getItem(this.getRecipeId(recipe)) ? true : false);
+  }
+
+  getRecipeId(recipe:Recipe): string {
+    return recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);
   }
 }
