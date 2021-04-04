@@ -20,4 +20,16 @@ export class ShowRecipeComponent implements OnInit {
   getRecipe(id) {
     this.recipeService.getRecipe(id).subscribe(res => { this.recipe = res[0]; });
   }
+
+  saveRecipe(recipe) {
+    this.recipeService.saveRecipe(recipe);
+  }
+
+  removeRecipe(recipe) {
+    this.recipeService.removeRecipe(recipe);
+  }
+
+  recipeSaved(recipe) {
+    return this.recipeService.recipeSaved(recipe);
+  }
 }
