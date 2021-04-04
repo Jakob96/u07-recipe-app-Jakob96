@@ -1,8 +1,7 @@
 <mat-toolbar color="primary">
-    <span>{{ headerTitle }}</span>
+    <a href="/" class="logo">{{ headerTitle }}</a>
     <span class="spacer"></span>
     <mat-nav-list class="list-horizontal">
-        <a mat-list-item>My recipes</a>
-        <a mat-list-item>Saved recipes</a>
+        <a mat-list-item href="/saved-recipes">My recipes</a>
     </mat-nav-list>
 </mat-toolbar>
