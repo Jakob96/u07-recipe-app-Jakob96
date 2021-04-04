@@ -47,6 +47,6 @@ export class RecipeService {
   }
 
   getRecipeId(recipe:Recipe): string {
-    return recipe.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);
+    return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);
   }
 }
