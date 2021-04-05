@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { debounce } from 'lodash';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,13 @@ export class HomeComponent implements OnInit {
   dishType: Array<string>;
   health: Array<string>;
 
-  constructor() { }
+  constructor() { 
+    this.handleSearch = debounce(this.handleSearch, 1000);
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
+  handleSearch(event: Event) {
+    this.search = (<HTMLInputElement>event.target).value;
   }
 }
