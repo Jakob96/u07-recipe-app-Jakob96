@@ -18,7 +18,12 @@ export class ShowRecipeComponent implements OnInit {
   }
 
   getRecipe(id:string): void {
-    this.recipeService.getRecipe(id).subscribe(res => { this.recipe = res[0]; });
+    if (this.recipeSaved(id)) {
+      this.recipe = this.recipeService.getSavedRecipe(id);
+    }
+    else {
+      this.recipeService.getRecipe(id).subscribe(res => { this.recipe = res[0]; });
+    }
   }
 
   saveRecipe(recipe:Recipe): void {
@@ -29,7 +34,11 @@ export class ShowRecipeComponent implements OnInit {
     this.recipeService.removeRecipe(recipe);
   }
 
-  recipeSaved(recipe:Recipe): boolean {
-    return this.recipeService.recipeSaved(recipe);
+  recipeSaved(id): boolean {
+    return this.recipeService.recipeSaved(id);
+  }
+
+  getRecipeId(recipe:Recipe): string {
+    return this.recipeService.getRecipeId(recipe);
   }
 }

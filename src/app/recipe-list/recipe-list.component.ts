@@ -71,8 +71,8 @@ export class RecipeListComponent implements OnInit {
     this.recipeService.removeRecipe(recipe);
   }
 
-  recipeSaved(recipe:Recipe): Boolean {
-    return this.recipeService.recipeSaved(recipe);
+  recipeSaved(id:string): Boolean {
+    return this.recipeService.recipeSaved(id);
   }
 
   getRecipeId(recipe:Recipe): string {

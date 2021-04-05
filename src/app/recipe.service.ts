@@ -38,6 +38,10 @@ export class RecipeService {
     );
   }
 
+  getSavedRecipe(id:string): Recipe {
+    return JSON.parse(localStorage.getItem(id));
+  }
+
   saveRecipe(recipe:Recipe): void {
     localStorage.setItem(this.getRecipeId(recipe), JSON.stringify(recipe));
   }
@@ -46,8 +50,8 @@ export class RecipeService {
     localStorage.removeItem(this.getRecipeId(recipe));
   }
 
-  recipeSaved(recipe:Recipe): boolean {
-    return (localStorage.getItem(this.getRecipeId(recipe)) ? true : false);
+  recipeSaved(id:string): boolean {
+    return (localStorage.getItem(id) ? true : false);
   }
 
   getRecipeId(recipe:Recipe): string {
