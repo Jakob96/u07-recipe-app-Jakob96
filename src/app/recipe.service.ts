@@ -58,6 +58,16 @@ export class RecipeService {
     return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);
   }
 
+  addRecipeInstruction(text:string, recipe:Recipe): void {
+    if (!recipe.instructions) {
+      recipe.instructions = [];
+    }
+    
+    recipe.instructions.push(text);
+    this.saveRecipe(recipe);
+  }
+
+
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     return throwError(alert('An error occured, please try again.'));
   }

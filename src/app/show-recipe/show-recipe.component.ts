@@ -10,6 +10,7 @@ import { Recipe } from '../recipe';
 })
 export class ShowRecipeComponent implements OnInit {
   recipe: Recipe;
+  instruction: string;
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
 
@@ -40,5 +41,12 @@ export class ShowRecipeComponent implements OnInit {
 
   getRecipeId(recipe:Recipe): string {
     return this.recipeService.getRecipeId(recipe);
+  }
+
+  addRecipeInstruction(text:string, recipe:Recipe): void {
+    if (text) {
+      this.recipeService.addRecipeInstruction(text, recipe);
+      this.instruction = '';
+    }
   }
 }

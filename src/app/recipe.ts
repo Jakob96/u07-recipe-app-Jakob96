@@ -13,6 +13,7 @@ export interface Recipe {
     cautions:        string[];
     ingredientLines: string[];
     ingredients:     Ingredient[];
+    instructions:    string[];
     calories:        number;
     totalWeight:     number;
     totalTime:       number;
