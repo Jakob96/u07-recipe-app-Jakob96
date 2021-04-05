@@ -3,8 +3,10 @@
     <h1>{{ recipe?.label }}</h1>
 </section>
 
-<button mat-raised-button color="primary" *ngIf="!recipeSaved(recipe)" (click)="saveRecipe(recipe)">Save recipe</button>
-<button mat-raised-button color="warn" *ngIf="recipeSaved(recipe)" (click)="removeRecipe(recipe)">Remove recipe from
+<button mat-raised-button color="primary" *ngIf="recipe && !recipeSaved(recipe)" (click)="saveRecipe(recipe)">Save
+    recipe</button>
+<button mat-raised-button color="warn" *ngIf="recipe && recipeSaved(recipe)" (click)="removeRecipe(recipe)">Remove
+    recipe from
     saved</button>
 
 <h3>Ingredients</h3>
