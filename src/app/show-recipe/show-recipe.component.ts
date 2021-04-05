@@ -17,19 +17,19 @@ export class ShowRecipeComponent implements OnInit {
    this.route.params.subscribe(params => { this.getRecipe(params['id']); });
   }
 
-  getRecipe(id) {
+  getRecipe(id:string): void {
     this.recipeService.getRecipe(id).subscribe(res => { this.recipe = res[0]; });
   }
 
-  saveRecipe(recipe) {
+  saveRecipe(recipe:Recipe): void {
     this.recipeService.saveRecipe(recipe);
   }
 
-  removeRecipe(recipe) {
+  removeRecipe(recipe:Recipe): void {
     this.recipeService.removeRecipe(recipe);
   }
 
-  recipeSaved(recipe) {
+  recipeSaved(recipe:Recipe): boolean {
     return this.recipeService.recipeSaved(recipe);
   }
 }

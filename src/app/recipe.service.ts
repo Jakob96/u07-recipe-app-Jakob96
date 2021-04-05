@@ -54,7 +54,7 @@ export class RecipeService {
     return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     return throwError(alert('An error occured, please try again.'));
   }
 }

@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  handleSearch(event: Event) {
+  handleSearch(event: Event): void {
     this.search = (<HTMLInputElement>event.target).value;
   }
 }

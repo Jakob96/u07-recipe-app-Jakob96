@@ -16,7 +16,7 @@ export class RecipeListComponent implements OnInit {
 
   constructor(private recipeService: RecipeService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.search) {
       this.getRecipes(this.search, 50);
     }
@@ -25,7 +25,7 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {    
+  ngOnChanges(changes: SimpleChanges): void {    
     if (this.search || this.dishType && this.dishType.length || this.health && this.health.length) {  
       this.getRecipes(this.search, 50)
     }
@@ -34,14 +34,14 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
-  getRecipes(query, max, mealType = null) {
+  getRecipes(query:string, max:number, mealType:string[] = null): void {
     this.recipeService.getRecipes(query, this.dishType, this.health, mealType, max)
       .subscribe(res => {
         this.recipes = res;
       })
   }
 
-  getMealRecommendations() {
+  getMealRecommendations(): void {
   const currentHour = parseInt(new Date().toLocaleTimeString('sv-se').substr(0, 2));
   let mealType: Array<string>;
 
@@ -63,19 +63,19 @@ export class RecipeListComponent implements OnInit {
     this.getRecipes(mealType[0], 50, mealType);
   }
 
-  saveRecipe(recipe) {
+  saveRecipe(recipe:Recipe): void {
     this.recipeService.saveRecipe(recipe);
   }
 
-  removeRecipe(recipe) {
+  removeRecipe(recipe:Recipe): void {
     this.recipeService.removeRecipe(recipe);
   }
 
-  recipeSaved(recipe) {
+  recipeSaved(recipe:Recipe): Boolean {
     return this.recipeService.recipeSaved(recipe);
   }
 
-  getRecipeId(recipe) {
+  getRecipeId(recipe:Recipe): string {
     return this.recipeService.getRecipeId(recipe);
   }
 }

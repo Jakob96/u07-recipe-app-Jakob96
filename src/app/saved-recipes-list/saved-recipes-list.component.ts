@@ -16,18 +16,18 @@ recipes: Recipe[] = [];
     this.getSavedRecipes();
   }
 
-  getSavedRecipes() {
+  getSavedRecipes(): void {
    for (let i = 0; i < localStorage.length; i++) {
       this.recipes.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
    }
   }
 
-  removeRecipe(recipe) {
+  removeRecipe(recipe:Recipe): void {
     this.recipes = this.recipes.filter((element) => element.uri != recipe.uri);
     this.recipeService.removeRecipe(recipe);
   }
 
-  getRecipeId(recipe) {
+  getRecipeId(recipe:Recipe): string {
     return this.recipeService.getRecipeId(recipe);
   }
 }
