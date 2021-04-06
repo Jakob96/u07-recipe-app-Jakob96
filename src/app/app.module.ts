@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-li
     RecipeListComponent,
     ShowRecipeComponent,
     SavedRecipesListComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
