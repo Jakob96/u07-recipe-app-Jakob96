@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,7 +15,7 @@ export class RecipeListComponent implements OnInit {
   @Input() health: Array<string>;
   recipes: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     if (this.search) {
@@ -65,10 +66,18 @@ export class RecipeListComponent implements OnInit {
 
   saveRecipe(recipe:Recipe): void {
     this.recipeService.saveRecipe(recipe);
+
+    this.snackBar.open('Recipe is saved', 'Close', {
+      duration: 2000
+    });
   }
 
   removeRecipe(recipe:Recipe): void {
     this.recipeService.removeRecipe(recipe);
+
+    this.snackBar.open('Recipe removed', 'Close', {
+      duration: 2000
+    });
   }
 
   recipeSaved(id:string): Boolean {

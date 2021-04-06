@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-show-recipe',
@@ -12,7 +13,7 @@ export class ShowRecipeComponent implements OnInit {
   recipe: Recipe;
   instruction: string;
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
    this.route.params.subscribe(params => { this.getRecipe(params['id']); });
@@ -29,10 +30,18 @@ export class ShowRecipeComponent implements OnInit {
 
   saveRecipe(recipe:Recipe): void {
     this.recipeService.saveRecipe(recipe);
+
+    this.snackBar.open('Recipe is saved', 'Close', {
+      duration: 2000
+    });
   }
 
   removeRecipe(recipe:Recipe): void {
     this.recipeService.removeRecipe(recipe);
+
+    this.snackBar.open('Recipe removed', 'Close', {
+      duration: 2000
+    });
   }
 
   recipeSaved(id): boolean {

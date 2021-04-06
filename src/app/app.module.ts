@@ -20,6 +20,7 @@ import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
 import { ErrorComponent } from './error/error.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ErrorComponent } from './error/error.component';
     MatSelectModule,
     MatListModule,
     MatExpansionModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-saved-recipes-list',
@@ -10,7 +11,7 @@ import { Recipe } from '../recipe';
 export class SavedRecipesListComponent implements OnInit {
 recipes: Recipe[] = [];
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getSavedRecipes();
@@ -25,6 +26,10 @@ recipes: Recipe[] = [];
   removeRecipe(recipe:Recipe): void {
     this.recipes = this.recipes.filter((element) => element.uri != recipe.uri);
     this.recipeService.removeRecipe(recipe);
+
+    this.snackBar.open('Recipe removed', 'Close', {
+      duration: 2000
+    });
   }
 
   getRecipeId(recipe:Recipe): string {
