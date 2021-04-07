@@ -2,6 +2,7 @@ import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-recipe-list',
@@ -14,6 +15,7 @@ export class RecipeListComponent implements OnInit {
   @Input() dishType: Array<string>;
   @Input() health: Array<string>;
   recipes: Recipe[] = [];
+  private subscriptions = new Subscription();
 
   constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) { }
 
@@ -26,6 +28,10 @@ export class RecipeListComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   ngOnChanges(changes: SimpleChanges): void {    
     if (this.search || this.dishType && this.dishType.length || this.health && this.health.length) {  
       this.getRecipes(this.search, 50)
@@ -36,10 +42,10 @@ export class RecipeListComponent implements OnInit {
   }
 
   getRecipes(query:string, max:number, mealType:string[] = null): void {
-    this.recipeService.getRecipes(query, this.dishType, this.health, mealType, max)
+    this.subscriptions.add(this.recipeService.getRecipes(query, this.dishType, this.health, mealType, max)
       .subscribe(res => {
         this.recipes = res;
-      })
+      }));
   }
 
   getMealRecommendations(): void {
