@@ -21,3 +21,17 @@
 .mat-form-field {
     width: 100%;
 }
+
+table {
+    font-size: 0.9em;
+    width: 100%;
+
+    thead, tbody {
+        display: block;
+    }
+
+    tbody {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+}

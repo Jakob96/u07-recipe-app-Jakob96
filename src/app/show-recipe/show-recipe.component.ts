@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../recipe';
+import { Recipe, Total } from '../recipe';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
@@ -14,6 +14,7 @@ export class ShowRecipeComponent implements OnInit {
   recipe: Recipe;
   instruction: string;
   private subscriptions = new Subscription();
+  totalNutrients: Array<Total> = [];
 
   constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
@@ -30,7 +31,10 @@ export class ShowRecipeComponent implements OnInit {
       this.recipe = this.recipeService.getSavedRecipe(id);
     }
     else {
-      this.subscriptions = this.recipeService.getRecipe(id).subscribe(res => { this.recipe = res[0]; });
+      this.subscriptions = this.recipeService.getRecipe(id).subscribe(res => { 
+        this.recipe = res[0]; 
+        Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]))
+      });
     }
   }
 

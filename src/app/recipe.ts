@@ -52,7 +52,7 @@ interface Ingredient {
     image:        string;
 }
 
-interface Total {
+export interface Total {
     label:    string;
     quantity: number;
     unit:     Unit;

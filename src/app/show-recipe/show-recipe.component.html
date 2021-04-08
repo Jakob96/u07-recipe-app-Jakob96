@@ -33,3 +33,20 @@
         <img src="{{ ingredient.image }}" class="round" alt="{{ ingredient.text }}" />
     </mat-expansion-panel>
 </mat-accordion>
+
+<h3>Nutrients</h3>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">Label</th>
+            <th scope="col">Quantity</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let data of totalNutrients">
+            <td>{{ data.label }}</td>
+            <td>{{ data.quantity | number }} {{ data.unit }}</td>
+        </tr>
+    </tbody>
+</table>
