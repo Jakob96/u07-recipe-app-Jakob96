@@ -29,11 +29,12 @@ export class ShowRecipeComponent implements OnInit {
   getRecipe(id:string): void {
     if (this.recipeSaved(id)) {
       this.recipe = this.recipeService.getSavedRecipe(id);
+      Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]));
     }
     else {
       this.subscriptions = this.recipeService.getRecipe(id).subscribe(res => { 
-        this.recipe = res[0]; 
-        Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]))
+        this.recipe = res[0];
+        Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]));
       });
     }
   }
