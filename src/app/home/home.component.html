@@ -1,7 +1,7 @@
 <mat-form-field>
     <mat-label>Search for recipes</mat-label>
-    <input matInput type="text" (keyup)="handleSearch($event)">
-    <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="search=''">
+    <input matInput type="text" (keyup)="handleSearch($event)" #searchField>
+    <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Clear" (click)="searchField.value=''">
         <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
