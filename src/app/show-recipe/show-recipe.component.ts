@@ -19,7 +19,7 @@ export class ShowRecipeComponent implements OnInit {
   constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });
+   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
   }
 
   ngOnDestroy(): void {
@@ -29,7 +29,7 @@ export class ShowRecipeComponent implements OnInit {
   getRecipe(id:string): void {
     if (this.recipeSaved(id)) {
       this.recipe = this.recipeService.getSavedRecipe(id);
-      Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]));
+      Object.entries(this.recipe["totalNutrients"]).map(data => this.totalNutrients.push(<Total>data[1]));    //Object.entries convers objects to arrays.
     }
     else {
       this.subscriptions = this.recipeService.getRecipe(id).subscribe(res => { 
@@ -63,7 +63,7 @@ export class ShowRecipeComponent implements OnInit {
     return this.recipeService.getRecipeId(recipe);
   }
 
-  addRecipeInstruction(text:string, recipe:Recipe): void {
+  addRecipeInstruction(text:string, recipe:Recipe): void {        //Lets users add their own instructions
     if (text) {
       this.recipeService.addRecipeInstruction(text, recipe);
       this.instruction = '';
