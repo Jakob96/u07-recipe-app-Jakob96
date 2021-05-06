@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "https://recipe-api-laravel.herokuapp.com/api/auth/",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}
