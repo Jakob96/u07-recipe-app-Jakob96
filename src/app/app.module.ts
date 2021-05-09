@@ -21,6 +21,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
 import { ErrorComponent } from './error/error.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ShowRecipeComponent,
     SavedRecipesListComponent,
     ErrorComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
