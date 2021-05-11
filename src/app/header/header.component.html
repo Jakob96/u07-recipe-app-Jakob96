@@ -2,6 +2,15 @@
     <a [routerLink]="'/'" class="logo">{{ headerTitle }}</a>
     <span class="spacer"></span>
     <mat-nav-list class="list-horizontal">
-        <a mat-list-item [routerLink]="'/saved-recipes'">My recipes</a>
+        <a mat-list-item [routerLink]="'/lists'" *ngIf="isSignedIn()">My recipes</a>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="isSignedIn()">{{ getUserName() }}</button>
+        <a mat-list-item [routerLink]="'/sign-in'" *ngIf="!isSignedIn()">Sign in</a>
     </mat-nav-list>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="signOut()">
+          <mat-icon>logout</mat-icon>
+          <span>Sign out</span>
+        </button>
+      </mat-menu>
 </mat-toolbar>
