@@ -1,0 +1,15 @@
+<h1>Add new list</h1>
+
+<form (submit)="addRecipeList()">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" name="name" required [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description (optional)</mat-label>
+        <textarea matInput name="description" [(ngModel)]="description"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Add</button>
+    <button mat-raised-button color="secondary" type="submit" [routerLink]="'/lists'">Back</button>
+</form>
+

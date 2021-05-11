@@ -1,5 +1,5 @@
 <h2>My lists</h2>
-<button mat-raised-button color="primary">Add list</button>
+<button mat-raised-button color="primary" [routerLink]="'/add-list'">Add list</button>
 
 <section class="grid">
     <mat-card class="card" *ngFor="let list of lists">

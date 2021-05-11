@@ -26,6 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RegisterComponent } from './register/register.component';
+import { AddRecipeListComponent } from './add-recipe-list/add-recipe-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { RegisterComponent } from './register/register.component';
     ErrorComponent,
     SignInComponent,
     RegisterComponent,
+    AddRecipeListComponent,
   ],
   imports: [
     BrowserModule,
