@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
+import { List } from './list';
 import { Recipe } from './recipe';
 import { environment } from '../environments/environment';
 
@@ -12,10 +13,11 @@ import { environment } from '../environments/environment';
 export class RecipeService {        //The recipe service handles api calls and contains methods related to recipes
 
   //API settings is stored in an environment file
-  private app_id = environment.app_id;
-  private app_key = environment.app_key;
-  private api_url = environment.api_url;
-  private api_auth = "&app_id=" + this.app_id + "&app_key=" + this.app_key;
+  private edamam_app_id = environment.edamam_app_id;
+  private edamam_app_key = environment.edamam_app_key;
+  private edamam_api_url = environment.edamam_api_url;
+  private edamam_api_auth = "&app_id=" + this.edamam_app_id + "&app_key=" + this.edamam_app_key;
+  private heroku_api_url = environment.heroku_api_url;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,7 +27,7 @@ export class RecipeService {        //The recipe service handles api calls and c
 
   //Uses the http client for making an api call with parameters
   getRecipes(query:string, dishType:Array<string> = null, health:Array<string> = null, mealType:Array<string> = null, max:number = 100): Observable<Recipe[]> {
-    return this.http.get<any>(this.api_url + query + this.api_auth + "&to=" + max + (dishType && dishType.length ? "&dishType=" + dishType.join("&dishType=") : "") + (health && health.length ? "&health=" + health.join("&health=") : "") + (mealType && mealType.length ? "&mealType=" + mealType.join("&mealType=") : "")).pipe(
+    return this.http.get<any>(this.edamam_api_url + query + this.edamam_api_auth + "&to=" + max + (dishType && dishType.length ? "&dishType=" + dishType.join("&dishType=") : "") + (health && health.length ? "&health=" + health.join("&health=") : "") + (mealType && mealType.length ? "&mealType=" + mealType.join("&mealType=") : "")).pipe(
       map(res => res.hits.map(res => res.recipe))
     ).pipe(
       retry(3) && catchError(this.handleError)      //Retry 3 times in case of an error and uses a separate method for handling the error
@@ -33,42 +35,24 @@ export class RecipeService {        //The recipe service handles api calls and c
   }
 
   getRecipe(id:string): Observable<Recipe> {
-    return this.http.get<any>(this.api_url + id + this.api_auth).pipe(
+    return this.http.get<any>(this.edamam_api_url + id + this.edamam_api_auth).pipe(
       map(res => res.hits.map(res => res.recipe))
     ).pipe(
       retry(3) && catchError(this.handleError)
     );
   }
 
-  getSavedRecipe(id:string): Recipe {
-    return JSON.parse(localStorage.getItem(id));
-  }
-
-  saveRecipe(recipe:Recipe): void {
-    localStorage.setItem(this.getRecipeId(recipe), JSON.stringify(recipe));
-  }
-
-  removeRecipe(recipe:Recipe): void {
-    localStorage.removeItem(this.getRecipeId(recipe));
-  }
-
-  recipeSaved(id:string): boolean {
-    return (localStorage.getItem(id) ? true : false);
+  getRecipeLists(): Observable<List[]> {
+    return this.http.get<any>(this.heroku_api_url + "/list").pipe(
+      map(res => res)
+      ).pipe(
+        retry(3) && catchError(this.handleError)
+      )
   }
 
   getRecipeId(recipe:Recipe): string {
     return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);      //Get the recipe id from the uri
   }
-
-  addRecipeInstruction(text:string, recipe:Recipe): void {
-    if (!recipe.instructions) {         //If the recipe instruction array is undefined, add an empty
-      recipe.instructions = [];
-    }
-    
-    recipe.instructions.push(text);
-    this.saveRecipe(recipe);
-  }
-
 
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     return throwError(alert('An error occured, please try again.'));
