@@ -40,6 +40,21 @@ export class AuthService {
       .pipe(catchError(this.handleError));
   };
 
+  signOut(): Observable<JSON> {
+    return this.http.post<any>(this.heroku_api_url + '/logout', null).pipe(
+      map(res => res))
+      .pipe(catchError(this.handleError));
+  };
+
+  removeUserData(): void {
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+  };
+
+  getToken(): String {
+    return localStorage.getItem('token');
+  } 
+
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     return throwError(alert('An error occured, please try again.'));
   }
