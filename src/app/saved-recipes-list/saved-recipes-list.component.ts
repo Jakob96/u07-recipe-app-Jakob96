@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
+import { List } from '../list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -10,25 +11,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class SavedRecipesListComponent implements OnInit {
 recipes: Recipe[] = [];
+lists: List[] = [];
 
   constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getSavedRecipes();
+    this.getRecipeLists();
   }
 
-  getSavedRecipes(): void {
-   for (let i = 0; i < localStorage.length; i++) {
-      this.recipes.push(JSON.parse(localStorage.getItem(localStorage.key(i))));     //Loops through local storage, converts the string to an object and push the recipe object to the recipe array
-   }
+  getRecipeLists(): void {
+    this.recipeService.getRecipeLists().subscribe(res => {
+      this.lists = res;
+    });
   }
 
-  removeRecipe(recipe:Recipe): void {
-    this.recipes = this.recipes.filter((element) => element.uri != recipe.uri);     //Filter out a recipe from the array and the second method removes it from local storage
-    this.recipeService.removeRecipe(recipe);
-
-    this.snackBar.open('Recipe removed', 'Close', {
-      duration: 2000
+  removeRecipeList(id:number): void {
+    this.recipeService.removeRecipeList(id).subscribe(res => {
+      this.snackBar.open('List removed', 'Close', {
+        duration: 2000
+      });
     });
   }
 

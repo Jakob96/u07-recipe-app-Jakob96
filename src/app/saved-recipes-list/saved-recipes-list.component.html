@@ -1,19 +1,20 @@
-<h2>Saved recipes</h2>
+<h2>My lists</h2>
+<button mat-raised-button color="primary">Add list</button>
+
 <section class="grid">
-    <mat-card class="card" *ngFor="let recipe of recipes">
+    <mat-card class="card" *ngFor="let list of lists">
         <mat-card-header>
             <mat-card-title>
-                <h3>{{ recipe.label }}</h3>
+                <h3>{{ list.name }}</h3>
             </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <img mat-card-image src="{{ recipe.image }}" alt="{{ recipe.label }}" height="250px" />
+            <p>{{ list.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button [routerLink]="'/recipe/' + getRecipeId(recipe)">Show
-                recipe</button>
-            <button mat-button (click)="removeRecipe(recipe)">Remove from saved</button>
+            <button mat-button>Show recipes</button>
+            <button mat-button (click)="removeRecipeList(list.id)">Remove list</button>
         </mat-card-actions>
     </mat-card>
-    <p *ngIf="!recipes.length">No recipes found.</p>
+    <p *ngIf="!lists.length">No lists found.</p>
 </section>
