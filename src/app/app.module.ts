@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,7 +22,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
 import { ErrorComponent } from './error/error.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatMenuModule } from '@angular/material/menu';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
     SavedRecipesListComponent,
     ErrorComponent,
     SignInComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,8 +54,16 @@ import { SignInComponent } from './sign-in/sign-in.component';
     MatListModule,
     MatExpansionModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatMenuModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
