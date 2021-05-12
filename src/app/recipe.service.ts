@@ -50,11 +50,35 @@ export class RecipeService {        //The recipe service handles api calls and c
       )
   }
 
+  addRecipeList(name:string, description:string): Observable<List> {
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('description', description);
+
+    return this.http.post<any>(this.heroku_api_url + "/list", formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
+  removeRecipeList(id:number): Observable<JSON> {
+    const formData = new FormData();
+    formData.append('_method', 'delete');
+
+    return this.http.post<any>(this.heroku_api_url + "/list/" + id, formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
   getRecipeId(recipe:Recipe): string {
     return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);      //Get the recipe id from the uri
   }
 
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
-    return throwError(alert('An error occured, please try again.'));
+    //return throwError(alert('An error occured, please try again.'));
+    return throwError(error);
   }
 }
