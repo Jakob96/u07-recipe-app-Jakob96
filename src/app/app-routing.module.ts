@@ -5,6 +5,7 @@ import { ShowRecipeComponent } from './show-recipe/show-recipe.component';
 import { SavedRecipesListComponent } from './saved-recipes-list/saved-recipes-list.component';
 import { AddRecipeListComponent } from './add-recipe-list/add-recipe-list.component';
 import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
+import { SaveRecipeComponent } from './save-recipe/save-recipe.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorComponent } from './error/error.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'recipe/:id', component: ShowRecipeComponent },
   { path: 'lists', component: SavedRecipesListComponent },
   { path: 'list/:id', component: SavedRecipesComponent },
+  { path: 'save-recipe/:id', component: SaveRecipeComponent },
   { path: 'add-list', component: AddRecipeListComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register', component: RegisterComponent },

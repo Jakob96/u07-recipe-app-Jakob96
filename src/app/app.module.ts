@@ -28,6 +28,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { RegisterComponent } from './register/register.component';
 import { AddRecipeListComponent } from './add-recipe-list/add-recipe-list.component';
 import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
+import { SaveRecipeComponent } from './save-recipe/save-recipe.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
     RegisterComponent,
     AddRecipeListComponent,
     SavedRecipesComponent,
+    SaveRecipeComponent,
   ],
   imports: [
     BrowserModule,
