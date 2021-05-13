@@ -27,6 +27,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { RegisterComponent } from './register/register.component';
 import { AddRecipeListComponent } from './add-recipe-list/add-recipe-list.component';
+import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddRecipeListComponent } from './add-recipe-list/add-recipe-list.compon
     SignInComponent,
     RegisterComponent,
     AddRecipeListComponent,
+    SavedRecipesComponent,
   ],
   imports: [
     BrowserModule,
