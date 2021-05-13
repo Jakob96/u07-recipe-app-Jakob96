@@ -27,4 +27,14 @@ export class SavedRecipesComponent implements OnInit {
       );
     }
   }
+
+  removeSavedRecipe(recipeId, listId): void {
+    if (recipeId && listId) {
+      this.recipeService.removeSavedRecipe(recipeId, listId).subscribe(
+        (res) => {
+          
+        }
+      )
+    }
+  }
 }

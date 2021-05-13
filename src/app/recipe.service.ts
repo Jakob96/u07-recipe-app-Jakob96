@@ -73,6 +73,26 @@ export class RecipeService {        //The recipe service handles api calls and c
     );
   }
 
+  getSavedRecipes(listId: number): Observable<any> {
+    return this.http.get<any>(this.heroku_api_url + "/recipe/" + listId).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
+  removeSavedRecipe(recipeId: number, listId: number): Observable<JSON> {
+    const formData = new FormData();
+    formData.append('_method', 'delete');
+    formData.append('listId', listId.toString());
+
+    return this.http.post<any>(this.heroku_api_url + "/recipe/" + recipeId, formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
   getRecipeId(recipe:Recipe): string {
     return recipe?.uri.substr(recipe.uri.indexOf('#') + 8, recipe.uri.length);      //Get the recipe id from the uri
   }
