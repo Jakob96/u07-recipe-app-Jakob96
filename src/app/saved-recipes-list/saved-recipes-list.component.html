@@ -12,7 +12,7 @@
             <p>{{ list.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>Show recipes</button>
+            <button mat-button [routerLink]="'/list/' + list.id">Show recipes</button>
             <button mat-button (click)="removeRecipeList(list.id)">Remove list</button>
         </mat-card-actions>
     </mat-card>
