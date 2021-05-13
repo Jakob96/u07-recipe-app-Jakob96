@@ -38,4 +38,13 @@ export class SaveRecipeComponent implements OnInit {
     )
   }
 
+  addRecipe(): void {
+    if (this.listSelection && this.recipe) {
+      this.recipeService.addRecipe(this.id, this.listSelection, this.recipe.label, this.recipe.image).subscribe(
+        (res) => {
+          console.log(res);
+        }
+      )
+    }
+  }
 }

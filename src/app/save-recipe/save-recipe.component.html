@@ -1,10 +1,10 @@
 <h1>Save recipe</h1>
 <p>Select a list below to save the recipe to.</p>
 
-<form>
+<form (submit)="addRecipe()">
     <mat-form-field appearance="fill">
         <mat-label>List</mat-label>
-        <mat-select [(ngModel)]="listSelection" name="list">
+        <mat-select [(ngModel)]="listSelection" name="list" required>
             <mat-option *ngFor="let list of lists" [value]="list.id">
               {{ list.name }}
             </mat-option>
