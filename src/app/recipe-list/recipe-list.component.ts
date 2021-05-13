@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +17,7 @@ export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];                       //Declares an empty array for recipe objects
   private subscriptions = new Subscription();   //The subscription object contains all subscriptions
 
-  constructor(private recipeService: RecipeService, private snackBar: MatSnackBar) { }
+  constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
     if (this.search) {                    //If search is set, do an api call or get meal recommendations based on time of the day
@@ -71,26 +70,6 @@ export class RecipeListComponent implements OnInit {
     }
 
     this.getRecipes(mealType[0], 50, mealType);
-  }
-
-  saveRecipe(recipe:Recipe): void {
-    this.recipeService.saveRecipe(recipe);
-
-    this.snackBar.open('Recipe is saved', 'Close', {
-      duration: 2000
-    });
-  }
-
-  removeRecipe(recipe:Recipe): void {
-    this.recipeService.removeRecipe(recipe);
-
-    this.snackBar.open('Recipe removed', 'Close', {
-      duration: 2000
-    });
-  }
-
-  recipeSaved(id:string): Boolean {
-    return this.recipeService.recipeSaved(id);
   }
 
   getRecipeId(recipe:Recipe): string {
