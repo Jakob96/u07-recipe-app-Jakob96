@@ -3,6 +3,7 @@ import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipe';
 import { List } from '../list';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-save-recipe',
@@ -15,7 +16,7 @@ export class SaveRecipeComponent implements OnInit {
   lists: List[] = [];
   listSelection: string = '';
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute) { }
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.getRecipe(params['id']); this.id = params['id']; });
@@ -42,9 +43,20 @@ export class SaveRecipeComponent implements OnInit {
     if (this.listSelection && this.recipe) {
       this.recipeService.addRecipe(this.id, this.listSelection, this.recipe.label, this.recipe.image).subscribe(
         (res) => {
-          console.log(res);
+          this.snackBar.open('The recipe has been saved!', 'Close', {
+            duration: 3000
+          });
+        },
+        (error) => {
+          if (error.status === 500) {
+            this.snackBar.open('The recipe is already in this list', 'Close', {
+              duration: 3000
+            });
+          }
+          else {
+            alert('An error occured, please try again.');
+          }
         }
-      )
-    }
+      )}
   }
 }
