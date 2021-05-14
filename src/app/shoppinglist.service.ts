@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { Shoppinglist } from './shoppinglist';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ShoppinglistService {
 
   constructor(private http: HttpClient) { }
 
-  getShoppingList(recipeId:string): Observable<JSON[]> {
+  getShoppingList(recipeId:string): Observable<Shoppinglist> {
     return this.http.get<any>(this.heroku_api_url + '/shoppinglists/' + recipeId).pipe(
       map(res => res)
     ).pipe(
@@ -20,7 +21,7 @@ export class ShoppinglistService {
     );
   }
 
-  addShoppingList(recipeId:string): Observable<JSON> {
+  addShoppingList(recipeId:string): Observable<Shoppinglist> {
     const formData = new FormData();
     formData.append('name', null);
     formData.append('edamamId', recipeId);
