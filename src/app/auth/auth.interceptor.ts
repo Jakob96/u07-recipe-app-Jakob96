@@ -27,7 +27,10 @@ export class AuthInterceptor implements HttpInterceptor {
         }
       });
     };
-    
+
+    /*If token has expired, remove user data and redirect to sign in page
+    Code inspiration from https://lironhazan.medium.com/angular-6-401-authentication-error-handling-888922def566 */
+
     return next.handle(request).pipe(tap(() => {}, 
     (err: any) => {
       if (err instanceof HttpErrorResponse) {
