@@ -1,4 +1,4 @@
 export interface Shoppinglist {
-    list: Array<JSON>;
-    items: Array<JSON>
+    list: Object;
+    items: Array<any>
 }
