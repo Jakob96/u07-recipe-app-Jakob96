@@ -57,6 +57,9 @@ export class AddRecipeListComponent implements OnInit {
       this.snackBar.open('The list has been updated!', 'close', {
         duration: 3000
       })
+
+      this.list.name = this.name;
+      this.list.description = this.description;
     }, (error) => {
       alert('An error occured, please try again');
     });
