@@ -33,6 +33,18 @@ export class ShoppinglistService {
     );
   }
 
+  addShoppingListItem(listId:string, item:string): Observable<any> {
+    const formData = new FormData();
+    formData.append('shoppinglistId', listId);
+    formData.append('item', item);
+
+    return this.http.post<any>(this.heroku_api_url + '/shoppinglistitems', formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
     return throwError(error);
   }
