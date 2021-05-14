@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
+import { ShoppinglistService } from '../shoppinglist.service';
 import { Recipe } from '../recipe';
 import { List } from '../list';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +17,7 @@ export class SaveRecipeComponent implements OnInit {
   lists: List[] = [];
   listSelection: string = '';
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private recipeService: RecipeService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => { this.getRecipe(params['id']); this.id = params['id']; });
@@ -46,6 +47,10 @@ export class SaveRecipeComponent implements OnInit {
           this.snackBar.open('The recipe has been saved!', 'Close', {
             duration: 3000
           });
+
+          this.shoppinglistService.addShoppingList(this.id).subscribe(
+            (res) => res
+          );
         },
         (error) => {
           if (error.status === 500) {
