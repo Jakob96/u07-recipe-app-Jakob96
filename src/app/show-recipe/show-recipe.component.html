@@ -3,7 +3,19 @@
     <h1>{{ recipe?.label }}</h1>
 </section>
 
-<button mat-raised-button color="primary" *ngIf="recipe" [routerLink]="'/save-recipe/' + getRecipeId(recipe)">Save recipe</button>
+<button mat-raised-button color="primary" *ngIf="recipe && userSignedIn" [routerLink]="'/save-recipe/' + getRecipeId(recipe)">Save recipe</button>
+
+<h3>Shopping list</h3>
+<mat-list *ngIf="shoppingList">
+    <mat-list-item *ngFor="let item of shoppingList; index as i">
+        {{ i + 1 + '.' }} {{ item.item }}
+    </mat-list-item>
+</mat-list>
+<mat-form-field appearance="fill" *ngIf="recipe && userSignedIn">
+    <mat-label>Add item</mat-label>
+    <textarea matInput [(ngModel)]="item"></textarea>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addShoppingListItem()">Add</button>
 
 <h3>Ingredients</h3>
 <mat-accordion>

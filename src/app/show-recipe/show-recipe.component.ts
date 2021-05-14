@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe, Total } from '../recipe';
+import { Shoppinglist } from '../shoppinglist';
+import { ShoppinglistService } from '../shoppinglist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-show-recipe',
@@ -12,14 +15,16 @@ import { Subscription } from 'rxjs';
 })
 export class ShowRecipeComponent implements OnInit {
   recipe: Recipe;
-  instruction: string;
+  item: string;
   private subscriptions = new Subscription();
   totalNutrients: Array<Total> = [];
+  shoppingList: Array<Shoppinglist>;
+  shoppingListId: string;
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
+   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); this.getShoppingList() });       //Retrieves the id parameter from url and calls getRecipe
   }
 
   ngOnDestroy(): void {
@@ -35,5 +40,23 @@ export class ShowRecipeComponent implements OnInit {
 
   getRecipeId(recipe:Recipe): string {
     return this.recipeService.getRecipeId(recipe);
+  }
+
+  getShoppingList(): void {
+    this.route.params.subscribe(params => this.shoppinglistService.getShoppingList(params['id']).subscribe(
+      (res) => { this.shoppingList = res.items; this.shoppingListId = res.list[0]['id'] }
+    ));
+  }
+
+  addShoppingListItem(): void {
+    if (this.item) {
+      this.route.params.subscribe(params => this.shoppinglistService.addShoppingListItem(this.shoppingListId, this.item).subscribe(
+        (res) => this.getShoppingList()
+      ));
+    }
+  }
+
+  userSignedIn(): Boolean {
+    return (this.authService.getToken() ? true : false);
   }
 }
