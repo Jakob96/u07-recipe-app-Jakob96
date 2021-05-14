@@ -112,7 +112,6 @@ export class RecipeService {        //The recipe service handles api calls and c
   }
 
   private handleError(error: HttpErrorResponse): Observable<HttpErrorResponse> {
-    //return throwError(alert('An error occured, please try again.'));
     return throwError(error);
   }
 }

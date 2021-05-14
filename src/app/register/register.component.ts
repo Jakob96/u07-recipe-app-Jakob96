@@ -22,6 +22,9 @@ export class RegisterComponent {
     this.authService.register(this.name, this.email, this.password, this.password_conf).subscribe(
       (resp) => {
         this.router.navigate(['/sign-in']);
+      },
+      (error) => {
+        alert('An error occured, please try again');
       }
     ).add(() => {
       this.loading = false;

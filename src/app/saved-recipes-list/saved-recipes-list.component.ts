@@ -27,9 +27,13 @@ lists: List[] = [];
 
   removeRecipeList(id:number): void {
     this.recipeService.removeRecipeList(id).subscribe(res => {
-      this.snackBar.open('List removed', 'Close', {
+      this.snackBar.open('The list has been removed', 'Close', {
         duration: 2000
       });
+      
+      this.lists = this.lists.filter((list) => list.id !== id);
+    }, (error) => {
+      alert('An error occured, please try again');
     });
   }
 

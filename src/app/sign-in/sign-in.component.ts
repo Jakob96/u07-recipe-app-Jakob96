@@ -23,6 +23,8 @@ export class SignInComponent {
         localStorage.setItem('user', JSON.stringify(resp.user));
 
         this.router.navigate(['/']);
+      }, (error) => {
+        alert('An error occured, please try again');
       }).add(() => { this.loading = false; });
     }
   }
