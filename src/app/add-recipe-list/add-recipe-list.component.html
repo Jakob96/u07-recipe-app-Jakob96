@@ -1,6 +1,7 @@
-<h1>Add new list</h1>
+<h1 *ngIf="!list">Add new list</h1>
+<h1 *ngIf="list">Edit {{ list.name }}</h1>
 
-<form (submit)="addRecipeList()">
+<form (submit)="handleSubmit()">
     <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput type="text" name="name" required [(ngModel)]="name">

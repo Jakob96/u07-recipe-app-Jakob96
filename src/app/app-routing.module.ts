@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'lists', component: SavedRecipesListComponent, canActivate: [AuthGuard] },
   { path: 'list/:id', component: SavedRecipesComponent, canActivate: [AuthGuard] },
   { path: 'save-recipe/:id', component: SaveRecipeComponent , canActivate: [AuthGuard]},
+  { path: 'add-list/:id/:method', component: AddRecipeListComponent, canActivate: [AuthGuard] },
   { path: 'add-list', component: AddRecipeListComponent, canActivate: [AuthGuard] },
   { path: 'sign-in', component: SignInComponent },
   { path: 'register', component: RegisterComponent },

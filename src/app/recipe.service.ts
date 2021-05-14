@@ -62,6 +62,19 @@ export class RecipeService {        //The recipe service handles api calls and c
     );
   }
 
+  updateRecipeList(id: string, name:string, description:string): Observable<List> {
+    const formData = new FormData();
+    formData.append('_method', 'put');
+    formData.append('name', name);
+    formData.append('description', description);
+
+    return this.http.post<any>(this.heroku_api_url + '/list/' + id, formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
   removeRecipeList(id:number): Observable<JSON> {
     const formData = new FormData();
     formData.append('_method', 'delete');
