@@ -12,11 +12,23 @@ export class ShoppinglistService {
 
   constructor(private http: HttpClient) { }
 
-  getShoppingList(recipeId:string): Observable<JSON> {
+  getShoppingList(recipeId:string): Observable<JSON[]> {
     return this.http.get<any>(this.heroku_api_url + '/shoppinglists/' + recipeId).pipe(
       map(res => res)
     ).pipe(
-      retry(3) && catchError(this.handleError)      //Retry 3 times in case of an error and uses a separate method for handling the error
+      retry(3) && catchError(this.handleError)
+    );
+  }
+
+  addShoppingList(recipeId:string): Observable<JSON> {
+    const formData = new FormData();
+    formData.append('name', null);
+    formData.append('edamamId', recipeId);
+
+    return this.http.post<any>(this.heroku_api_url + '/shoppinglists', formData).pipe(
+      map(res => res)
+    ).pipe(
+      retry(3) && catchError(this.handleError)
     );
   }
 
