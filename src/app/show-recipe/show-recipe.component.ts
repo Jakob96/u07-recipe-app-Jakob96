@@ -26,7 +26,7 @@ export class ShowRecipeComponent implements OnInit {
 
   ngOnInit(): void {
    this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
-   this.getShoppingList();
+   if (this.authService.getToken()) { this.getShoppingList() };
   }
 
   ngOnDestroy(): void {
