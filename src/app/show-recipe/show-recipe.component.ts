@@ -20,11 +20,13 @@ export class ShowRecipeComponent implements OnInit {
   totalNutrients: Array<Total> = [];
   shoppingList: Array<Shoppinglist>;
   shoppingListId: string;
+  recipeSavedBool: Boolean = false;
 
   constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); this.getShoppingList() });       //Retrieves the id parameter from url and calls getRecipe
+   this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
+   this.getShoppingList();
   }
 
   ngOnDestroy(): void {
@@ -43,20 +45,34 @@ export class ShowRecipeComponent implements OnInit {
   }
 
   getShoppingList(): void {
-    this.route.params.subscribe(params => this.shoppinglistService.getShoppingList(params['id']).subscribe(
-      (res) => { this.shoppingList = res.items; this.shoppingListId = res.list[0]['id'] }
-    ));
+    this.recipeSaved().then(
+      () => {
+        if (this.recipeSavedBool) {
+          this.route.params.subscribe(params => this.shoppinglistService.getShoppingList(params['id']).subscribe(
+            (res) => { this.shoppingList = res.items; this.shoppingListId = res.list[0]['id'] }
+          ));
+        }
+      }
+    );
   }
 
   addShoppingListItem(): void {
     if (this.item) {
-      this.route.params.subscribe(params => this.shoppinglistService.addShoppingListItem(this.shoppingListId, this.item).subscribe(
-        (res) => this.getShoppingList()
-      ));
+      this.shoppinglistService.addShoppingListItem(this.shoppingListId, this.item).subscribe(
+        (res) => { this.getShoppingList(); this.item = ''; }
+      );
     }
   }
 
   userSignedIn(): Boolean {
     return (this.authService.getToken() ? true : false);
+  }
+
+  async recipeSaved(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.route.params.subscribe(params => this.recipeService.recipeSaved(params['id']).subscribe(
+        (res) => resolve((res > 0) ? this.recipeSavedBool = true : this.recipeSavedBool = false)
+      ));
+    })
   }
 }

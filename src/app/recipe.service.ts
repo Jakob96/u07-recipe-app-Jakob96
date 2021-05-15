@@ -108,6 +108,12 @@ export class RecipeService {        //The recipe service handles api calls and c
     )
   }
 
+  recipeSaved(recipeId:string): Observable<any> {
+    if (recipeId) {
+      return this.http.get<any>(this.heroku_api_url + '/recipe-saved/' + recipeId);
+    }
+  }
+
   removeSavedRecipe(recipeId: number, listId: number): Observable<JSON> {
     const formData = new FormData();
     formData.append('_method', 'delete');
