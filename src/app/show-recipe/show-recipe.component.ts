@@ -56,11 +56,17 @@ export class ShowRecipeComponent implements OnInit {
     );
   }
 
-  addShoppingListItem(): void {
-    if (this.item) {
-      this.shoppinglistService.addShoppingListItem(this.shoppingListId, this.item).subscribe(
+  addShoppingListItem(item: string): void {
+    if (item) {
+      this.shoppinglistService.addShoppingListItem(this.shoppingListId, item).subscribe(
         (res) => { this.getShoppingList(); this.item = ''; }
       );
+    }
+  }
+ 
+  addIngredientsToShoppinglist(): void {
+    if (this.recipe.ingredients) {
+      this.recipe.ingredients.forEach((item) => this.addShoppingListItem(item.text));
     }
   }
 

@@ -16,10 +16,11 @@
         <mat-label>Add item</mat-label>
         <textarea matInput [(ngModel)]="item"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="addShoppingListItem()">Add</button>
+    <button mat-raised-button color="primary" (click)="addShoppingListItem(item)">Add</button>
 </section>
 
 <h3>Ingredients</h3>
+<button mat-raised-button color="primary" *ngIf="recipeSavedBool && recipe" (click)="addIngredientsToShoppinglist()">Add to shopping list</button>
 <mat-accordion>
     <mat-expansion-panel *ngFor="let ingredient of recipe?.ingredients">
         <mat-expansion-panel-header>
