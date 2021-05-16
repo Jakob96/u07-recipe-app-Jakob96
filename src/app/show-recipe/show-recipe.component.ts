@@ -4,7 +4,6 @@ import { RecipeService } from '../recipe.service';
 import { Recipe, Total } from '../recipe';
 import { Shoppinglist } from '../shoppinglist';
 import { ShoppinglistService } from '../shoppinglist.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -23,9 +22,9 @@ export class ShowRecipeComponent implements OnInit {
   shoppingListId: string;
   recipeSavedBool: Boolean = false;
   pageUrl: string = encodeURI(window.location.href);
-  shareUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.facebook.com/plugins/share_button.php?href=' + this.pageUrl + '&layout=button&size=small&width=67&height=20&appId');
+  shareUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.facebook.com/plugins/share_button.php?href=' + this.pageUrl + '&layout=button&size=small&width=67&height=20&appId');  //domSanitizer.bypassSecurityTrustResourceUrl makes the url trusted
 
-  constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar, private domSanitizer: DomSanitizer) { }
+  constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
    this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
@@ -78,7 +77,7 @@ export class ShowRecipeComponent implements OnInit {
   }
 
   async recipeSaved(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {               //Returns a promise object which is awaited at row 50
       this.route.params.subscribe(params => this.recipeService.recipeSaved(params['id']).subscribe(
         (res) => resolve((res > 0) ? this.recipeSavedBool = true : this.recipeSavedBool = false)
       ));

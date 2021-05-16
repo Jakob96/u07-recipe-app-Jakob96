@@ -13,7 +13,7 @@ import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {     //Auth interceptor is activated on each request and if the request matches the specific api url and a token exists in localstorage, add an auth header with the token included
 
   constructor(private authService: AuthService, private router: Router) {}
 
