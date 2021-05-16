@@ -1,6 +1,7 @@
 <section class="hero">
     <img src="{{ recipe?.image }}" class="round" alt="{{ recipe?.label }}" />
     <h1>{{ recipe?.label }}</h1>
+    <iframe [src]="this.shareUrl" width="67" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
 </section>
 
 <button mat-raised-button color="primary" *ngIf="recipe" [routerLink]="'/save-recipe/' + getRecipeId(recipe)">Save recipe</button>

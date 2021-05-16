@@ -7,6 +7,7 @@ import { ShoppinglistService } from '../shoppinglist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-show-recipe',
@@ -21,8 +22,10 @@ export class ShowRecipeComponent implements OnInit {
   shoppingList: Array<Shoppinglist>;
   shoppingListId: string;
   recipeSavedBool: Boolean = false;
+  pageUrl: string = encodeURI(window.location.href);
+  shareUrl: SafeResourceUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.facebook.com/plugins/share_button.php?href=' + this.pageUrl + '&layout=button&size=small&width=67&height=20&appId');
 
-  constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private recipeService: RecipeService, private authService: AuthService, private shoppinglistService: ShoppinglistService, private route: ActivatedRoute, private snackBar: MatSnackBar, private domSanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
    this.subscriptions = this.route.params.subscribe(params => { this.getRecipe(params['id']); });       //Retrieves the id parameter from url and calls getRecipe
