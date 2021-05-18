@@ -13,11 +13,11 @@ import { environment } from '../environments/environment';
 export class RecipeService {        //The recipe service handles api calls and contains methods related to recipes
 
   //API settings is stored in an environment file
-  private edamam_app_id = environment.edamam_app_id;
-  private edamam_app_key = environment.edamam_app_key;
-  private edamam_api_url = environment.edamam_api_url;
+  private edamam_app_id = process.env.edamam_app_id;
+  private edamam_app_key = process.env.edamam_app_key;
+  private edamam_api_url = process.env.edamam_api_url;
   private edamam_api_auth = "&app_id=" + this.edamam_app_id + "&app_key=" + this.edamam_app_key;
-  private heroku_api_url = environment.heroku_api_url;
+  private heroku_api_url = process.env.heroku_api_url;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
