@@ -10,7 +10,7 @@ import { User } from './user';
 })
 export class AuthService {
 
-  private heroku_api_url = environment.heroku_api_url;
+  private heroku_api_url = process.env.heroku_api_url;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

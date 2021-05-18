@@ -9,7 +9,7 @@ import { Shoppinglist } from './shoppinglist';
   providedIn: 'root'
 })
 export class ShoppinglistService {
-  private heroku_api_url = environment.heroku_api_url;
+  private heroku_api_url = process.env.heroku_api_url;
 
   constructor(private http: HttpClient) { }
 

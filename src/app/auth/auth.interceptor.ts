@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {     //Auth interceptor
   constructor(private authService: AuthService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (request.url.includes(environment.heroku_api_url) && this.authService.getToken()) {
+    if (request.url.includes(process.env.heroku_api_url) && this.authService.getToken()) {
       const token = this.authService.getToken();
 
       request = request.clone({
